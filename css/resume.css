@@ -1,0 +1,188 @@
+/* ==========================================================================
+   Resume template — a 1:1 port of main.tex.
+   Unit note: CSS "pt" = 1/72 in = PDF big point (bp). TeX pt = 0.99626 bp.
+   All numbers below were measured from the compiled PDF (reusme.pdf).
+   Vertical gaps between blocks are computed in js/render.js from font metrics
+   so that baseline-to-baseline distances match LaTeX exactly.
+   ========================================================================== */
+
+.page {
+  --accent: #4169E1;            /* xcolor svgnames RoyalBlue */
+  --b-body: 9pt;                /* overwritten from JS metrics */
+  position: relative;
+  width: 595.276pt;             /* A4 */
+  height: 841.89pt;
+  background: #fff;
+  color: #000;
+  overflow: hidden;
+  font-family: "LMR", "Latin Modern Roman", "CMU Serif", serif;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+.page-content {
+  position: absolute;
+  left: 39.685pt;               /* 14 mm */
+  width: 515.906pt;             /* \textwidth = 210 - 2*14 mm */
+  top: 150.49pt;                /* overwritten from JS */
+}
+.page-content > .blk { display: flow-root; }
+
+/* reserved institute-header area (preview only, never printed) */
+.reserved-guide {
+  position: absolute; left: 39.685pt; right: 39.685pt; top: 14pt;
+  border: 1px dashed #b9c3d6; border-radius: 4pt;
+  display: flex; align-items: center; justify-content: center;
+  font: 500 9pt/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #8592ab; text-align: center; padding: 6pt;
+}
+.margin-guide {
+  position: absolute; left: 0; right: 0; height: 0;
+  border-top: 1px dashed rgba(220, 38, 38, .35);
+}
+
+/* Rich text: inline runs never enlarge the line box */
+.rt b, .rt i, .rt strong, .rt em { line-height: 0; }
+.rt b, .rt strong { font-weight: 700; }
+.rt i, .rt em { font-style: italic; }
+
+.tt { font-family: "LMMono", monospace; font-weight: 400; line-height: 0; }
+.tex-logo { line-height: 0; }
+
+/* math symbols drawn like Computer Modern Symbol (thin strokes, on the math axis) */
+.mx {
+  display: inline-block; position: relative; height: 0.5em; vertical-align: 0; white-space: nowrap;
+  color: rgba(0, 0, 0, 0.012);   /* glyph kept in the PDF text layer (copy / ATS), visually hidden */
+  line-height: 0.5em; font-weight: 400;
+}
+.mx::after {
+  content: ""; position: absolute; inset: 0; background: #000;
+  -webkit-mask: var(--mx) center / 100% 100% no-repeat; mask: var(--mx) center / 100% 100% no-repeat;
+}
+.mx-r { width: 1em; --mx: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 500'%3E%3Cpath d='M56 250H925M790 120Q850 215 935 250Q850 285 790 380' fill='none' stroke='%23000' stroke-width='40' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.mx-l { width: 1em; --mx: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 500'%3E%3Cpath d='M944 250H75M210 120Q150 215 65 250Q150 285 210 380' fill='none' stroke='%23000' stroke-width='40' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.mx-s { width: 0.778em; --mx: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 778 500'%3E%3Cpath d='M70 300Q150 170 280 215T500 285Q630 330 708 200' fill='none' stroke='%23000' stroke-width='42' stroke-linecap='round'/%3E%3C/svg%3E"); }
+
+/* \LaTeX logo */
+.tex-logo { white-space: nowrap; }
+.tex-logo .tl-a { font-size: 0.7em; line-height: 0; position: relative; top: -0.3em; margin: 0 -0.214em 0 -0.514em; }
+.tex-logo .tl-e { position: relative; top: 0.2155em; margin: 0 -0.125em 0 -0.1667em; }
+
+/* ---------- \section : RoyalBlue small caps, rules on both sides ---------- */
+.r-sec-line {
+  display: flex;
+  align-items: baseline;
+  color: var(--accent);
+  font-family: "LMCaps", "LMR", serif;
+  font-size: 13.948pt;          /* \fontsize{14}{17} */
+  line-height: 16.936pt;
+}
+.r-sec-line .rule {
+  flex: 1 1 0;
+  min-width: 18pt;
+  height: 0.498pt;              /* \rule{\linewidth}{0.5pt} sits on the baseline */
+  background: currentColor;
+}
+.r-sec-t {
+  flex: 0 1 auto;
+  margin: 0 11.955pt;           /* 2 x \tabcolsep */
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+/* ---------- \subsection : bold \large title, italic \small date ---------- */
+.r-tl { display: flex; align-items: baseline; }
+.r-title {
+  flex: 1 1 auto; min-width: 0;
+  font-weight: 700;
+  font-size: 11.955pt;          /* \large = 12pt */
+  line-height: 13.948pt;        /* 14pt */
+}
+.r-title { letter-spacing: -0.0125em; }      /* cmbx12 optical size */
+.r-title .extra { font-weight: 400; }
+.r-date {
+  flex: none;
+  margin-left: 11.955pt;
+  padding-right: 4.23pt;        /* trailing glue measured in the PDF */
+  font-style: italic;
+  font-size: 8.966pt;           /* \small = 9pt */
+  line-height: 0;
+  white-space: nowrap;
+  letter-spacing: 0.0127em;     /* cmti9 optical size */
+}
+.r-sub {
+  margin-top: 0.18pt;           /* title -> sub-line baseline = 12.54pt */
+  font-family: "LMSlant", "LMR", serif;   /* \sl */
+  font-size: 9.963pt;           /* \fontsize{10}{12.5} */
+  line-height: 12.453pt;
+}
+.r-sub b, .r-sub strong { font-weight: 700; }
+.r-sub i, .r-sub em { font-family: "LMR"; font-style: italic; }
+
+/* ---------- itemize : leftmargin 14pt, \small$\bullet$ label ---------- */
+.r-bul { padding-left: 13.948pt; }
+.r-bt, .r-text {
+  position: relative;
+  font-size: 9.963pt;
+  line-height: 11.955pt;        /* \baselineskip 12pt */
+  text-align: justify;
+  text-align-last: left;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+.r-bt .dot {
+  position: absolute;
+  left: -9.05pt;                /* cmsy9 bullet: 4.85pt from the margin */
+  top: calc(var(--b-body) - 2.24pt - 1.74pt);   /* centred on the math axis */
+  width: 3.48pt; height: 3.48pt;
+  border-radius: 50%;
+  background: #000;
+}
+
+/* ---------- Technical-skills table (tabularx, \arraystretch 1.1) ---------- */
+.r-table table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.r-table td {
+  border: 0.398pt solid #000;
+  padding: var(--td-pt, 1pt) 5.98pt var(--td-pb, 0pt);
+  font-size: 9.963pt;
+  line-height: 11.955pt;
+}
+.r-table td.l { width: 100.06pt; text-align: center; font-weight: 700; vertical-align: middle; box-sizing: border-box; }
+.r-table td.v { text-align: justify; text-align-last: left; vertical-align: top; }
+
+/* ---------- Optional personal header ---------- */
+.r-hdr { text-align: center; }
+.r-name { font-weight: 700; font-size: 20.66pt; line-height: 25.4pt; }  /* \huge */
+.r-contact { font-size: 9.963pt; line-height: 11.955pt; }
+.r-contact a { color: inherit; text-decoration: none; }
+.r-contact .sep { padding: 0 4pt; }
+
+/* empty-state hint inside the page */
+.r-empty {
+  font: 400 10pt/1.4 -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #9aa3b5; text-align: center; padding-top: 80pt;
+}
+
+/* ---------- Print: only the pages, real A4 ---------- */
+@page { size: A4; margin: 0; }
+@media print {
+  html, body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
+  body > *:not(main) { display: none !important; }
+  main.layout { display: block !important; height: auto !important; padding: 0 !important; }
+  .rail, .editor-pane, .splitter, .preview-bar, .advice { display: none !important; }
+  html, body { overflow: visible !important; height: auto !important; }
+  .preview-pane { display: block !important; }
+  .preview-pane, .preview-scroll { overflow: visible !important; height: auto !important; padding: 0 !important; background: none !important; border: 0 !important; }
+  .pages-scaler { transform: none !important; width: auto !important; height: auto !important; }
+  .pages { display: block !important; gap: 0 !important; padding: 0 !important; width: auto !important; }
+  .page-wrap { break-after: page; page-break-after: always; }
+  .page-wrap:last-child { break-after: auto; page-break-after: auto; }
+  .page { box-shadow: none !important; margin: 0 !important; outline: none !important; height: 296.8mm !important; }
+  .page-tag, .reserved-guide, .margin-guide, .overflow-flag, #measureRoot { display: none !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

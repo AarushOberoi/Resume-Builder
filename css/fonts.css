@@ -1,0 +1,13 @@
+/* Latin Modern (GUST Font License) — the OpenType successor of Computer Modern,
+   i.e. the same faces LaTeX uses for \documentclass{article} with T1 fontenc. */
+@font-face { font-family: "LMR"; src: url("../fonts/lm-roman-regular.woff") format("woff"); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: "LMR"; src: url("../fonts/lm-roman-bold.woff") format("woff"); font-weight: 700; font-style: normal; font-display: block; }
+@font-face { font-family: "LMR"; src: url("../fonts/lm-roman-italic.woff") format("woff"); font-weight: 400; font-style: italic; font-display: block; }
+@font-face { font-family: "LMR"; src: url("../fonts/lm-roman-bolditalic.woff") format("woff"); font-weight: 700; font-style: italic; font-display: block; }
+/* \sl (slanted) — used for the entry sub-line */
+@font-face { font-family: "LMSlant"; src: url("../fonts/lm-romanslant-regular.woff") format("woff"); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: "LMSlant"; src: url("../fonts/lm-romanslant-bold.woff") format("woff"); font-weight: 700; font-style: normal; font-display: block; }
+/* \texttt — used for the "++" in C++ exactly as in the original source */
+@font-face { font-family: "LMMono"; src: url("../fonts/lm-mono-regular.woff") format("woff"); font-weight: 400; font-style: normal; font-display: block; }
+/* \scshape — section headings */
+@font-face { font-family: "LMCaps"; src: url("../fonts/lm-romancaps-regular.woff") format("woff"); font-weight: 400; font-style: normal; font-display: block; }
